@@ -4,14 +4,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, CheckCircle, XCircle, Loader2, QrCode } from "lucide-react";
+import { ArrowRight, CheckCircle, XCircle, Loader2, QrCode, Camera, FileText } from "lucide-react";
 import { toast } from "sonner";
+import { Scanner } from '@yudiel/react-qr-scanner';
 
 export default function VerifyAssignment() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [qrData, setQrData] = useState("");
   const [verificationResult, setVerificationResult] = useState<any>(null);
+  const [scanMode, setScanMode] = useState<"manual" | "camera">("manual");
 
   const handleVerify = async () => {
     if (!qrData.trim()) {
@@ -136,12 +138,59 @@ export default function VerifyAssignment() {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Textarea
-                placeholder="الصق بيانات QR Code هنا..."
-                value={qrData}
-                onChange={(e) => setQrData(e.target.value)}
-                className="min-h-[120px] font-mono text-sm"
-              />
+              <div className="flex gap-2 mb-4">
+                <Button
+                  variant={scanMode === "manual" ? "default" : "outline"}
+                  onClick={() => setScanMode("manual")}
+                  className="flex-1 gap-2"
+                >
+                  <FileText className="h-4 w-4" />
+                  إدخال يدوي
+                </Button>
+                <Button
+                  variant={scanMode === "camera" ? "default" : "outline"}
+                  onClick={() => setScanMode("camera")}
+                  className="flex-1 gap-2"
+                >
+                  <Camera className="h-4 w-4" />
+                  مسح بالكاميرا
+                </Button>
+              </div>
+
+              {scanMode === "manual" ? (
+                <Textarea
+                  placeholder="الصق بيانات QR Code هنا..."
+                  value={qrData}
+                  onChange={(e) => setQrData(e.target.value)}
+                  className="min-h-[120px] font-mono text-sm"
+                />
+              ) : (
+                <div className="relative rounded-lg overflow-hidden bg-muted">
+                  <Scanner
+                    onScan={(result) => {
+                      if (result && result[0]?.rawValue) {
+                        setQrData(result[0].rawValue);
+                        toast.success("تم مسح QR Code بنجاح!");
+                        setScanMode("manual");
+                      }
+                    }}
+                    onError={(error) => {
+                      console.error("QR Scanner error:", error);
+                      toast.error("فشل مسح QR Code. تأكد من الأذونات.");
+                    }}
+                    styles={{
+                      container: {
+                        width: "100%",
+                        paddingTop: "75%"
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute inset-0 border-2 border-primary rounded-lg m-8 shadow-lg animate-pulse" />
+                  </div>
+                </div>
+              )}
+
               <Button
                 onClick={handleVerify}
                 disabled={loading || !qrData.trim()}
