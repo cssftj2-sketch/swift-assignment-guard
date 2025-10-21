@@ -30,7 +30,7 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
   };
 
   return (
-    <div className="bg-white text-black p-12 max-w-4xl mx-auto" id="assignment-document" style={{ fontFamily: 'Arial, sans-serif' }}>
+    <div className="bg-white text-black p-8 max-w-4xl mx-auto" id="assignment-document" style={{ fontFamily: 'Arial, sans-serif' }}>
       {/* Header */}
       <div className="border-b-[3px] border-gray-800 pb-3 mb-4">
         <div className="flex justify-between items-start mb-3">

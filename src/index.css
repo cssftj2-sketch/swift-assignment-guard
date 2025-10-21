@@ -163,6 +163,12 @@ All colors MUST be HSL.
 @media print {
   body {
     background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .no-print {
+    display: none !important;
   }
   
   .print\:hidden {
@@ -170,13 +176,16 @@ All colors MUST be HSL.
   }
   
   #assignment-document {
-    max-width: 100%;
-    box-shadow: none;
-    page-break-after: avoid;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 0 !important;
+    padding: 1.5cm !important;
   }
   
   @page {
-    size: A4;
-    margin: 1cm;
+    size: A4 portrait;
+    margin: 0;
   }
 }
