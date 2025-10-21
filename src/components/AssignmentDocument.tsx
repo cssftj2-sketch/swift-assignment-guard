@@ -1,5 +1,6 @@
 import { QRCodeSVG } from "qrcode.react";
 import signatureStamp from "@/assets/signature-stamp.jpeg";
+import logo from "@/assets/logo.png";
 
 interface AssignmentDocumentProps {
   data: {
@@ -39,13 +40,11 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
             <p>Presse écriteet électronique</p>
           </div>
           <div className="text-center">
-            <div className="bg-gradient-to-r from-red-600 to-blue-900 text-white px-6 py-3 rounded-lg">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold">الجزائر</span>
-                <span className="text-2xl font-bold">مباشر</span>
-              </div>
-              <p className="text-xs mt-1">ALGERIE DIRECT</p>
-            </div>
+            <img 
+              src={logo} 
+              alt="الجزائر مباشر - Algerie Direct" 
+              className="h-24 w-auto mx-auto"
+            />
           </div>
         </div>
         <div className="text-center text-blue-800 underline text-lg font-semibold">
