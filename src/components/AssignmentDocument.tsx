@@ -25,7 +25,7 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
     return date.toLocaleDateString('ar-DZ', { 
       year: 'numeric', 
       month: 'long', 
-      day: 'numeric' 
+      day: '2-digit'
     });
   };
 
@@ -107,15 +107,33 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
         ملاحظة: يرجى من السلطات المدنية والعسكرية تسهيل مهمة حامل صاحب هذه الوثيقة.
       </div>
 
-      {/* Signature Section */}
+      {/* Signature Section with QR Code */}
       <div className="mb-12">
-        <div className="flex justify-start items-end">
+        <div className="flex justify-between items-end">
+          {/* Signature and Stamp on the left */}
           <div>
             <img 
               src={signatureStamp} 
               alt="التوقيع والختم الرسمي" 
               className="w-72 h-auto"
+              onError={(e) => {
+                console.error("Failed to load signature stamp");
+                e.currentTarget.style.display = 'none';
+              }}
             />
+          </div>
+          
+          {/* QR Code on the right */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="bg-white p-2 border-2 border-gray-300 rounded">
+              <QRCodeSVG 
+                value={data.qrData}
+                size={120}
+                level="H"
+                includeMargin={false}
+              />
+            </div>
+            <p className="text-xs text-gray-600 text-center">امسح للتحقق</p>
           </div>
         </div>
       </div>
