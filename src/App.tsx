@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import IssueAssignment from "./pages/IssueAssignment";
 import VerifyAssignment from "./pages/VerifyAssignment";
 import AssignmentsList from "./pages/AssignmentsList";
+import ViewAssignment from "./pages/ViewAssignment";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/issue" element={<IssueAssignment />} />
           <Route path="/verify" element={<VerifyAssignment />} />
           <Route path="/assignments" element={<AssignmentsList />} />
+          <Route path="/assignment/:id" element={<ViewAssignment />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

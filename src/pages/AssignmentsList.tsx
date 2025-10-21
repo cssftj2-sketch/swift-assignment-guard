@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Search, FileText } from "lucide-react";
+import { ArrowRight, Search, FileText, Eye } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AssignmentsList() {
@@ -164,12 +164,22 @@ export default function AssignmentsList() {
                     </div>
 
                     <div className="flex items-center justify-between pt-4 border-t">
-                      <p className="text-xs text-muted-foreground">
-                        تاريخ الإصدار: {new Date(assignment.created_at).toLocaleDateString('ar-EG')}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        هاتف: {assignment.journalist?.phone}
-                      </p>
+                      <div className="flex flex-col gap-1">
+                        <p className="text-xs text-muted-foreground">
+                          تاريخ الإصدار: {new Date(assignment.created_at).toLocaleDateString('ar-EG')}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          هاتف: {assignment.journalist?.phone}
+                        </p>
+                      </div>
+                      <Button
+                        onClick={() => navigate(`/assignment/${assignment.id}`)}
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Eye className="h-4 w-4" />
+                        عرض الوثيقة
+                      </Button>
                     </div>
                   </div>
                 ))}
