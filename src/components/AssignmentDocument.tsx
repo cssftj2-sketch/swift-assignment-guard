@@ -30,117 +30,109 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
   };
 
   return (
-    <div className="bg-white text-black p-8 max-w-4xl mx-auto" id="assignment-document">
+    <div className="bg-white text-black p-12 max-w-4xl mx-auto" id="assignment-document" style={{ fontFamily: 'Arial, sans-serif' }}>
       {/* Header */}
-      <div className="border-b-2 border-gray-300 pb-4 mb-6">
-        <div className="flex justify-between items-start mb-4">
-          <div className="text-sm space-y-1">
-            <p className="font-semibold">Journal électronique AlgerieDirect</p>
-            <p>Édité par une entreprise EURLBC COMM</p>
-            <p>Presse écriteet électronique</p>
+      <div className="border-b-[3px] border-gray-800 pb-3 mb-4">
+        <div className="flex justify-between items-start mb-3">
+          <div className="text-xs space-y-0.5 text-left">
+            <p className="font-semibold">Journal électronique <span className="font-bold">AlgerieDirect</span></p>
+            <p>Édité par une entreprise <span className="font-semibold">EURLBC COMM</span></p>
+            <p>Presse écrite et électronique</p>
           </div>
           <div className="text-center">
             <img 
               src={logo} 
               alt="الجزائر مباشر - Algerie Direct" 
-              className="h-24 w-auto mx-auto"
+              className="h-20 w-auto mx-auto"
             />
           </div>
         </div>
-        <div className="text-center text-blue-800 underline text-lg font-semibold">
+        <div className="text-center text-blue-900 underline text-base font-bold mt-2">
           www.algeriedirect.dz
         </div>
       </div>
 
       {/* Registration Number */}
-      <div className="text-left mb-6">
-        <p className="text-sm font-semibold">رقم التسجيل: {data.registrationNumber}</p>
+      <div className="text-right mb-8">
+        <p className="text-sm font-semibold">رقم التسجيل: <span className="font-bold">{data.registrationNumber}</span></p>
       </div>
 
       {/* Title */}
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold border-b-4 border-black inline-block pb-2">
+      <div className="text-center mb-10">
+        <h1 className="text-5xl font-bold inline-block pb-1 border-b-[3px] border-black">
           أمر بمهمة
         </h1>
       </div>
 
       {/* Content */}
-      <div className="space-y-6 mb-8" style={{ fontFamily: 'Cairo, sans-serif' }}>
-        <div className="flex items-center border-b border-dotted border-gray-400 py-2">
-          <span className="font-semibold ml-4">الاسم:</span>
-          <span className="flex-1 text-center">{data.fullName}</span>
+      <div className="space-y-4 mb-10 text-right" style={{ direction: 'rtl' }}>
+        <div className="flex items-baseline">
+          <span className="font-semibold text-base whitespace-nowrap ml-2">الاسم:</span>
+          <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{data.fullName}</span>
         </div>
 
-        <div className="flex items-center border-b border-dotted border-gray-400 py-2">
-          <span className="font-semibold ml-4">اللقب:</span>
-          <span className="flex-1 text-center">{data.title}</span>
+        <div className="flex items-baseline">
+          <span className="font-semibold text-base whitespace-nowrap ml-2">اللقب:</span>
+          <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{data.title}</span>
         </div>
 
-        <div className="flex items-center border-b border-dotted border-gray-400 py-2">
-          <span className="font-semibold ml-4">المؤسسة:</span>
-          <span className="flex-1 text-center">{data.organization}</span>
+        <div className="flex items-baseline">
+          <span className="font-semibold text-base whitespace-nowrap ml-2">المؤسسة:</span>
+          <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{data.organization}</span>
         </div>
 
-        <div className="flex items-center border-b border-dotted border-gray-400 py-2">
-          <span className="font-semibold ml-4">الصفة:</span>
-          <span className="flex-1 text-center">{data.position}</span>
+        <div className="flex items-baseline">
+          <span className="font-semibold text-base whitespace-nowrap ml-2">الصفة:</span>
+          <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{data.position}</span>
         </div>
 
-        <div className="flex items-center border-b border-dotted border-gray-400 py-2">
-          <span className="font-semibold ml-4">المهمة:</span>
-          <span className="flex-1 text-center">{data.missionType} في {data.missionLocation}</span>
+        <div className="flex items-baseline">
+          <span className="font-semibold text-base whitespace-nowrap ml-2">المهمة:</span>
+          <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{data.missionType} في {data.missionLocation}</span>
         </div>
 
-        <div className="flex items-center border-b border-dotted border-gray-400 py-2">
-          <span className="font-semibold ml-4">تاريخ بداية المهمة:</span>
-          <span className="flex-1 text-center">{formatDate(data.startDate)}</span>
+        <div className="flex items-baseline">
+          <span className="font-semibold text-base whitespace-nowrap ml-2">تاريخ بداية المهمة:</span>
+          <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{formatDate(data.startDate)}</span>
         </div>
 
-        <div className="flex items-center border-b border-dotted border-gray-400 py-2">
-          <span className="font-semibold ml-4">تاريخ نهاية المهمة:</span>
-          <span className="flex-1 text-center">{formatDate(data.endDate)}</span>
+        <div className="flex items-baseline">
+          <span className="font-semibold text-base whitespace-nowrap ml-2">تاريخ نهاية المهمة:</span>
+          <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{formatDate(data.endDate)}</span>
         </div>
       </div>
 
       {/* Note */}
-      <div className="text-sm italic text-center mb-12 text-gray-700">
+      <div className="text-sm text-center mb-16 text-gray-700" style={{ direction: 'rtl' }}>
         ملاحظة: يرجى من السلطات المدنية والعسكرية تسهيل مهمة حامل صاحب هذه الوثيقة.
       </div>
 
       {/* Signature Section */}
-      <div className="flex justify-between items-end mb-8">
-        <div className="w-48">
-          {/* QR Code */}
-          <div className="bg-white p-2 border-2 border-blue-900 rounded-lg inline-block">
-            <QRCodeSVG value={data.qrData} size={120} level="H" />
-          </div>
-        </div>
-        
-        <div className="text-center">
-          <div className="mb-4">
-            {/* Signature and stamp image */}
+      <div className="mb-12">
+        <div className="flex justify-start items-end">
+          <div>
             <img 
               src={signatureStamp} 
               alt="التوقيع والختم الرسمي" 
-              className="w-64 h-auto mx-auto"
+              className="w-72 h-auto"
             />
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="border-t-2 border-gray-300 pt-4 mt-8">
-        <div className="flex justify-between text-xs text-gray-600">
-          <div>
-            <p className="font-semibold">Siègesocial</p>
-            <p>Villa84,CitéChahidHamdiAEK</p>
+      <div className="border-t-2 border-gray-800 pt-3 mt-8">
+        <div className="flex justify-between text-[10px] text-gray-700">
+          <div className="text-left space-y-0.5">
+            <p className="font-semibold">Siège social</p>
+            <p>Villa 84, Cité Chahid Hamdi AEK</p>
             <p>35000 Boumerdes, Algerie.</p>
-            <p>E-mail:bcinfo.dz@gmail.com</p>
+            <p>E-mail: bcinfo.dz@gmail.com</p>
           </div>
-          <div className="text-left">
-            <p className="font-semibold">LeDirecteurdePublication:ISLAMREKHILA</p>
+          <div className="text-right space-y-0.5">
+            <p className="font-semibold">Le Directeur de Publication: ISLAM REKHILA</p>
             <p>Téléphone : +213 542 136 373</p>
-            <p className="underline text-blue-800">www.algeriedirect.dz</p>
+            <p className="underline text-blue-900 font-semibold">www.algeriedirect.dz</p>
           </div>
         </div>
       </div>
