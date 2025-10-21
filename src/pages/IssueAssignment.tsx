@@ -5,24 +5,28 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowRight, FileText, Loader2 } from "lucide-react";
+import { ArrowRight, FileText, Loader2, Printer } from "lucide-react";
 import { toast } from "sonner";
-import { QRCodeSVG } from "qrcode.react";
+import { AssignmentDocument } from "@/components/AssignmentDocument";
 
 export default function IssueAssignment() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [generatedQR, setGeneratedQR] = useState<string | null>(null);
+  const [assignmentData, setAssignmentData] = useState<any>(null);
   const [formData, setFormData] = useState({
     fullName: "",
+    title: "",
     nationalId: "",
     phone: "",
     email: "",
+    organization: "الجزائر مباشر",
+    position: "مراسل صحفي",
     missionType: "",
     missionLocation: "",
     startDate: "",
     endDate: "",
-    issuedBy: ""
+    issuedBy: "الجزائر مباشر"
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,13 +82,19 @@ export default function IssueAssignment() {
       // Generate secure data
       const secureData = generateSecureData();
       const assignmentNumber = `AM-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+      const year = new Date().getFullYear();
+      const registrationNumber = `${year}/${Math.floor(Math.random() * 1000)}`;
       
       // Create QR code data
       const qrData = JSON.stringify({
         id: crypto.randomUUID(),
         assignmentNumber,
+        registrationNumber,
         journalist: formData.fullName,
+        title: formData.title,
         nationalId: formData.nationalId,
+        organization: formData.organization,
+        position: formData.position,
         mission: formData.missionType,
         location: formData.missionLocation,
         startDate: formData.startDate,
@@ -121,6 +131,12 @@ export default function IssueAssignment() {
 
       if (assignmentError) throw assignmentError;
 
+      setAssignmentData({
+        assignmentNumber,
+        registrationNumber,
+        ...formData,
+        qrData
+      });
       setGeneratedQR(qrData);
       toast.success("تم إصدار أمر المهمة بنجاح!");
     } catch (error: any) {
@@ -131,51 +147,71 @@ export default function IssueAssignment() {
     }
   };
 
-  if (generatedQR) {
+  const handlePrint = () => {
+    window.print();
+  };
+
+  if (generatedQR && assignmentData) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background flex items-center justify-center p-4">
-        <Card className="max-w-2xl w-full border-2 animate-fadeIn">
-          <CardHeader className="text-center">
-            <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-gradient-to-br from-secondary to-secondary/70 flex items-center justify-center">
-              <FileText className="h-8 w-8 text-secondary-foreground" />
-            </div>
-            <CardTitle className="text-3xl">تم إصدار أمر المهمة بنجاح!</CardTitle>
-            <CardDescription>يمكنك الآن طباعة أو حفظ رمز QR</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex justify-center p-8 bg-white rounded-xl border-2">
-              <QRCodeSVG value={generatedQR} size={300} level="H" />
-            </div>
-            <div className="flex gap-4">
-              <Button
-                onClick={() => {
-                  setGeneratedQR(null);
-                  setFormData({
-                    fullName: "",
-                    nationalId: "",
-                    phone: "",
-                    email: "",
-                    missionType: "",
-                    missionLocation: "",
-                    startDate: "",
-                    endDate: "",
-                    issuedBy: ""
-                  });
-                }}
-                variant="outline"
-                className="flex-1"
-              >
-                إصدار أمر جديد
-              </Button>
-              <Button
-                onClick={() => navigate("/")}
-                className="flex-1 bg-gradient-to-r from-primary to-primary-glow"
-              >
-                العودة للرئيسية
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background p-4">
+        <div className="container mx-auto max-w-6xl">
+          {/* Print Controls - Hidden on print */}
+          <div className="mb-6 print:hidden">
+            <Card className="border-2">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-2xl">تم إصدار أمر المهمة بنجاح!</CardTitle>
+                    <CardDescription>يمكنك الآن طباعة الوثيقة</CardDescription>
+                  </div>
+                  <div className="flex gap-3">
+                    <Button
+                      onClick={handlePrint}
+                      className="gap-2 bg-gradient-to-r from-primary to-primary-glow"
+                    >
+                      <Printer className="h-4 w-4" />
+                      طباعة الوثيقة
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setGeneratedQR(null);
+                        setAssignmentData(null);
+                        setFormData({
+                          fullName: "",
+                          title: "",
+                          nationalId: "",
+                          phone: "",
+                          email: "",
+                          organization: "الجزائر مباشر",
+                          position: "مراسل صحفي",
+                          missionType: "",
+                          missionLocation: "",
+                          startDate: "",
+                          endDate: "",
+                          issuedBy: "الجزائر مباشر"
+                        });
+                      }}
+                      variant="outline"
+                    >
+                      إصدار أمر جديد
+                    </Button>
+                    <Button
+                      onClick={() => navigate("/")}
+                      variant="outline"
+                    >
+                      العودة للرئيسية
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+            </Card>
+          </div>
+
+          {/* Document Preview */}
+          <div className="bg-white shadow-2xl rounded-lg overflow-hidden">
+            <AssignmentDocument data={assignmentData} />
+          </div>
+        </div>
       </div>
     );
   }
@@ -205,14 +241,25 @@ export default function IssueAssignment() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="fullName">الاسم الكامل *</Label>
+                  <Label htmlFor="fullName">الاسم *</Label>
                   <Input
                     id="fullName"
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleInputChange}
                     required
-                    placeholder="أدخل الاسم الكامل"
+                    placeholder="أدخل الاسم"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="title">اللقب *</Label>
+                  <Input
+                    id="title"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="أدخل اللقب"
                   />
                 </div>
                 <div className="space-y-2">
@@ -250,6 +297,28 @@ export default function IssueAssignment() {
                   />
                 </div>
                 <div className="space-y-2">
+                  <Label htmlFor="organization">المؤسسة *</Label>
+                  <Input
+                    id="organization"
+                    name="organization"
+                    value={formData.organization}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="الجزائر مباشر"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="position">الصفة *</Label>
+                  <Input
+                    id="position"
+                    name="position"
+                    value={formData.position}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="مثال: مراسل صحفي"
+                  />
+                </div>
+                <div className="space-y-2">
                   <Label htmlFor="missionType">نوع المهمة *</Label>
                   <Input
                     id="missionType"
@@ -257,7 +326,7 @@ export default function IssueAssignment() {
                     value={formData.missionType}
                     onChange={handleInputChange}
                     required
-                    placeholder="مثال: تغطية صحفية"
+                    placeholder="مثال: التغطية الصحفية"
                   />
                 </div>
                 <div className="space-y-2">

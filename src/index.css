@@ -158,3 +158,25 @@ All colors MUST be HSL.
     animation: pulse-glow 2s ease-in-out infinite;
   }
 }
+
+/* Print Styles */
+@media print {
+  body {
+    background: white !important;
+  }
+  
+  .print\:hidden {
+    display: none !important;
+  }
+  
+  #assignment-document {
+    max-width: 100%;
+    box-shadow: none;
+    page-break-after: avoid;
+  }
+  
+  @page {
+    size: A4;
+    margin: 1cm;
+  }
+}
