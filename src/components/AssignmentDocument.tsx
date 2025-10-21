@@ -34,17 +34,20 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
       {/* Header */}
       <div className="border-b-[3px] border-gray-800 pb-3 mb-4">
         <div className="flex justify-between items-start mb-3">
-          <div className="text-xs space-y-0.5 text-left">
-            <p className="font-semibold">Journal électronique <span className="font-bold">AlgerieDirect</span></p>
-            <p>Édité par une entreprise <span className="font-semibold">EURLBC COMM</span></p>
-            <p>Presse écrite et électronique</p>
-          </div>
-          <div className="text-center">
+          {/* Logo on the RIGHT for Arabic layout */}
+          <div className="text-center flex-shrink-0">
             <img 
               src={logo} 
               alt="الجزائر مباشر - Algerie Direct" 
-              className="h-20 w-auto mx-auto"
+              className="h-16 w-auto"
             />
+          </div>
+          
+          {/* Text on the LEFT */}
+          <div className="text-xs space-y-0.5 text-left flex-shrink-0">
+            <p className="font-semibold">Journal électronique <span className="font-bold">AlgerieDirect</span></p>
+            <p>Édité par une entreprise <span className="font-semibold">EURLBC COMM</span></p>
+            <p>Presse écrite et électronique</p>
           </div>
         </div>
         <div className="text-center text-blue-900 underline text-base font-bold mt-2">
@@ -115,7 +118,7 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
             <img 
               src={signatureStamp} 
               alt="التوقيع والختم الرسمي" 
-              className="w-72 h-auto"
+              className="w-64 h-auto"
               onError={(e) => {
                 console.error("Failed to load signature stamp");
                 e.currentTarget.style.display = 'none';
@@ -128,7 +131,7 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
             <div className="bg-white p-2 border-2 border-gray-300 rounded">
               <QRCodeSVG 
                 value={data.qrData}
-                size={120}
+                size={100}
                 level="H"
                 includeMargin={false}
               />
