@@ -1,4 +1,5 @@
 import { QRCodeSVG } from "qrcode.react";
+import signatureStamp from "@/assets/signature-stamp.jpeg";
 
 interface AssignmentDocumentProps {
   data: {
@@ -117,18 +118,13 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
         </div>
         
         <div className="text-center">
-          <div className="mb-16">
-            {/* Space for stamp and signature */}
-            <div className="relative">
-              <div className="w-32 h-32 rounded-full border-4 border-blue-900 mx-auto flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-xs font-bold text-blue-900">الختم الرسمي</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="border-t-2 border-black pt-2 w-48">
-            <p className="text-sm">التوقيع</p>
+          <div className="mb-4">
+            {/* Signature and stamp image */}
+            <img 
+              src={signatureStamp} 
+              alt="التوقيع والختم الرسمي" 
+              className="w-64 h-auto mx-auto"
+            />
           </div>
         </div>
       </div>
