@@ -179,14 +179,9 @@ export default function VerifyAssignment() {
                     }}
                     onError={(error) => {
                       console.error("QR Scanner error:", error);
-                      toast.error("فشل مسح QR Code. تأكد من الأذونات.");
                     }}
-                    constraints={{
-                      facingMode: "environment",
-                      aspectRatio: 1
-                    }}
-                    formats={['qr_code']}
-                    scanDelay={500}
+                    allowMultiple={true}
+                    scanDelay={1000}
                     styles={{
                       container: {
                         width: "100%",
@@ -195,7 +190,7 @@ export default function VerifyAssignment() {
                     }}
                   />
                   <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                    <div className="w-64 h-64 border-4 border-primary rounded-lg shadow-lg" />
+                    <div className="w-64 h-64 border-4 border-primary rounded-lg shadow-[0_0_0_9999px_rgba(0,0,0,0.5)]" />
                   </div>
                 </div>
               )}
