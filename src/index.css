@@ -157,6 +157,12 @@ All colors MUST be HSL.
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
+
+  /* Hide Lovable badge globally */
+  [data-lovable-badge],
+  .lovable-badge {
+    display: none !important;
+  }
 }
 
 /* Print Styles */
@@ -168,6 +174,12 @@ All colors MUST be HSL.
   }
   
   .no-print {
+    display: none !important;
+  }
+  
+  /* Hide Lovable badge in print */
+  [data-lovable-badge],
+  .lovable-badge {
     display: none !important;
   }
   
