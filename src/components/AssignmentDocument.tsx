@@ -30,10 +30,10 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
   };
 
   return (
-    <div className="bg-white text-black p-8 max-w-4xl mx-auto" id="assignment-document" style={{ fontFamily: 'Arial, sans-serif' }}>
+    <div className="bg-white text-black p-6 max-w-4xl mx-auto" id="assignment-document" style={{ fontFamily: 'Arial, sans-serif' }}>
       {/* Header */}
-      <div className="border-b-[3px] border-gray-800 pb-3 mb-4">
-        <div className="flex justify-between items-start mb-3">
+      <div className="border-b-[3px] border-gray-800 pb-2 mb-3">
+        <div className="flex justify-between items-start mb-2">
           {/* Logo on the RIGHT for Arabic layout */}
           <div className="text-center flex-shrink-0">
             <img 
@@ -56,19 +56,19 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
       </div>
 
       {/* Registration Number */}
-      <div className="text-right mb-8">
+      <div className="text-right mb-4">
         <p className="text-sm font-semibold">رقم التسجيل: <span className="font-bold">{data.registrationNumber}</span></p>
       </div>
 
       {/* Title */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-6">
         <h1 className="text-5xl font-bold inline-block pb-1 border-b-[3px] border-black">
           أمر بمهمة
         </h1>
       </div>
 
       {/* Content */}
-      <div className="space-y-4 mb-10 text-right" style={{ direction: 'rtl' }}>
+      <div className="space-y-3 mb-6 text-right" style={{ direction: 'rtl' }}>
         <div className="flex items-baseline">
           <span className="font-semibold text-base whitespace-nowrap ml-2">الاسم:</span>
           <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{data.fullName}</span>
@@ -106,12 +106,12 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
       </div>
 
       {/* Note */}
-      <div className="text-sm text-center mb-16 text-gray-700" style={{ direction: 'rtl' }}>
+      <div className="text-sm text-center mb-8 text-gray-700" style={{ direction: 'rtl' }}>
         ملاحظة: يرجى من السلطات المدنية والعسكرية تسهيل مهمة حامل صاحب هذه الوثيقة.
       </div>
 
       {/* Signature Section with QR Code */}
-      <div className="mb-12">
+      <div className="mb-6">
         <div className="flex justify-between items-end">
           {/* Signature and Stamp on the left */}
           <div>
@@ -142,7 +142,7 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
       </div>
 
       {/* Footer */}
-      <div className="border-t-2 border-gray-800 pt-3 mt-8">
+      <div className="border-t-2 border-gray-800 pt-2 mt-4">
         <div className="flex justify-between text-[10px] text-gray-700">
           <div className="text-left space-y-0.5">
             <p className="font-semibold">Siège social</p>

@@ -181,7 +181,7 @@ All colors MUST be HSL.
     page-break-after: avoid !important;
     page-break-inside: avoid !important;
     margin: 0 !important;
-    padding: 1.5cm !important;
+    padding: 1cm 1.5cm !important;
   }
   
   @page {
