@@ -39,7 +39,7 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
             <img 
               src={logo} 
               alt="الجزائر مباشر - Algerie Direct" 
-              className="h-16 w-auto"
+              className="h-12 w-auto"
             />
           </div>
           
