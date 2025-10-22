@@ -165,11 +165,14 @@ export default function VerifyAssignment() {
                   className="min-h-[120px] font-mono text-sm"
                 />
               ) : (
-                <div className="relative rounded-lg overflow-hidden bg-muted">
+                <div className="relative rounded-lg overflow-hidden bg-black">
                   <Scanner
-                    onScan={(result) => {
-                      if (result && result[0]?.rawValue) {
-                        setQrData(result[0].rawValue);
+                    onScan={(detectedCodes) => {
+                      console.log("Scanner detected:", detectedCodes);
+                      if (detectedCodes && detectedCodes.length > 0) {
+                        const scannedData = detectedCodes[0].rawValue;
+                        console.log("Scanned QR data:", scannedData);
+                        setQrData(scannedData);
                         toast.success("تم مسح QR Code بنجاح!");
                         setScanMode("manual");
                       }
@@ -178,15 +181,21 @@ export default function VerifyAssignment() {
                       console.error("QR Scanner error:", error);
                       toast.error("فشل مسح QR Code. تأكد من الأذونات.");
                     }}
+                    constraints={{
+                      facingMode: "environment",
+                      aspectRatio: 1
+                    }}
+                    formats={['qr_code']}
+                    scanDelay={500}
                     styles={{
                       container: {
                         width: "100%",
-                        paddingTop: "75%"
+                        height: "400px"
                       }
                     }}
                   />
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute inset-0 border-2 border-primary rounded-lg m-8 shadow-lg animate-pulse" />
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                    <div className="w-64 h-64 border-4 border-primary rounded-lg shadow-lg" />
                   </div>
                 </div>
               )}
