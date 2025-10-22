@@ -1,5 +1,5 @@
 import { QRCodeSVG } from "qrcode.react";
-import signatureStamp from "@/assets/signature-stamp.jpeg";
+import signatureStamp from "@/assets/signature-stamp.png";
 import logo from "@/assets/logo.png";
 
 interface AssignmentDocumentProps {
