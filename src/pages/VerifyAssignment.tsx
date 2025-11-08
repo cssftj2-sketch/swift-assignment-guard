@@ -23,14 +23,6 @@ export default function VerifyAssignment() {
 
     setLoading(true);
     try {
-      // Parse QR data
-      let parsedData;
-      try {
-        parsedData = JSON.parse(qrData);
-      } catch {
-        throw new Error("بيانات QR Code غير صالحة");
-      }
-
       // Find assignment
       const { data: assignment, error } = await supabase
         .from("assignments")
