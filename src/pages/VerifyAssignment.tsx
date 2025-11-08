@@ -167,15 +167,16 @@ export default function VerifyAssignment() {
                         console.log("Scanned QR data:", scannedData);
                         setQrData(scannedData);
                         toast.success("تم مسح QR Code بنجاح!");
-                        setScanMode("manual");
+                        // Don't switch mode yet, verify first
                         handleVerify(scannedData);
                       }
                     }}
                     onError={(error) => {
                       console.error("QR Scanner error:", error);
+                      toast.error("حدث خطأ في مسح QR Code");
                     }}
-                    allowMultiple={true}
-                    scanDelay={1000}
+                    allowMultiple={false}
+                    scanDelay={2000}
                     styles={{
                       container: {
                         width: "100%",
@@ -185,6 +186,11 @@ export default function VerifyAssignment() {
                   />
                   <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
                     <div className="w-64 h-64 border-4 border-primary rounded-lg shadow-[0_0_0_9999px_rgba(0,0,0,0.5)]" />
+                  </div>
+                  <div className="absolute bottom-4 left-0 right-0 text-center">
+                    <p className="text-white bg-black/50 inline-block px-4 py-2 rounded-lg">
+                      وجه الكاميرا نحو QR Code
+                    </p>
                   </div>
                 </div>
               )}
