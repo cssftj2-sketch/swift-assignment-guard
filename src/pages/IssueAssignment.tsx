@@ -16,7 +16,7 @@ export default function IssueAssignment() {
   const [assignmentData, setAssignmentData] = useState<any>(null);
   const [formData, setFormData] = useState({
     fullName: "",
-    title: "",
+    // title: "",
     nationalId: "",
     phone: "",
     email: "",
@@ -91,7 +91,7 @@ export default function IssueAssignment() {
         assignmentNumber,
         registrationNumber,
         journalist: formData.fullName,
-        title: formData.title,
+        // title: formData.title,
         nationalId: formData.nationalId,
         organization: formData.organization,
         position: formData.position,
@@ -178,7 +178,7 @@ export default function IssueAssignment() {
                         setAssignmentData(null);
                         setFormData({
                           fullName: "",
-                          title: "",
+                          // title: "",
                           nationalId: "",
                           phone: "",
                           email: "",
@@ -241,17 +241,17 @@ export default function IssueAssignment() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="fullName">الاسم *</Label>
+                  <Label htmlFor="fullName">الاسم و اللقب *</Label>
                   <Input
                     id="fullName"
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleInputChange}
                     required
-                    placeholder="أدخل الاسم"
+                    placeholder="  أدخل الإسم و اللقب"
                   />
                 </div>
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                   <Label htmlFor="title">اللقب *</Label>
                   <Input
                     id="title"
@@ -261,7 +261,7 @@ export default function IssueAssignment() {
                     required
                     placeholder="أدخل اللقب"
                   />
-                </div>
+                </div> */}
                 <div className="space-y-2">
                   <Label htmlFor="nationalId">الرقم الوطني *</Label>
                   <Input
