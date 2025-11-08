@@ -70,14 +70,14 @@ export function AssignmentDocument({ data }: AssignmentDocumentProps) {
       {/* Content */}
       <div className="space-y-3 mb-6 text-right" style={{ direction: 'rtl' }}>
         <div className="flex items-baseline">
-          <span className="font-semibold text-base whitespace-nowrap ml-2">الاسم:</span>
+          <span className="font-semibold text-base whitespace-nowrap ml-2"> الاسم و اللقب:</span>
           <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{data.fullName}</span>
         </div>
 
-        <div className="flex items-baseline">
+        {/* <div className="flex items-baseline">
           <span className="font-semibold text-base whitespace-nowrap ml-2">اللقب:</span>
           <span className="flex-1 border-b border-dotted border-gray-500 pb-1 text-center">{data.title}</span>
-        </div>
+        </div> */}
 
         <div className="flex items-baseline">
           <span className="font-semibold text-base whitespace-nowrap ml-2">المؤسسة:</span>
