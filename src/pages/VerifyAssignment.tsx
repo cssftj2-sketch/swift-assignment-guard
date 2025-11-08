@@ -15,8 +15,9 @@ export default function VerifyAssignment() {
   const [verificationResult, setVerificationResult] = useState<any>(null);
   const [scanMode, setScanMode] = useState<"manual" | "camera">("manual");
 
-  const handleVerify = async () => {
-    if (!qrData.trim()) {
+  const handleVerify = async (data?: string) => {
+    const dataToVerify = data || qrData;
+    if (!dataToVerify.trim()) {
       toast.error("الرجاء إدخال بيانات QR Code");
       return;
     }
@@ -30,7 +31,7 @@ export default function VerifyAssignment() {
           *,
           journalist:journalists(full_name, national_id, phone)
         `)
-        .eq("qr_code_data", qrData)
+        .eq("qr_code_data", dataToVerify)
         .maybeSingle();
 
       if (error) throw error;
@@ -167,6 +168,7 @@ export default function VerifyAssignment() {
                         setQrData(scannedData);
                         toast.success("تم مسح QR Code بنجاح!");
                         setScanMode("manual");
+                        handleVerify(scannedData);
                       }
                     }}
                     onError={(error) => {
@@ -188,7 +190,7 @@ export default function VerifyAssignment() {
               )}
 
               <Button
-                onClick={handleVerify}
+                onClick={() => handleVerify()}
                 disabled={loading || !qrData.trim()}
                 className="w-full h-12 bg-gradient-to-r from-primary to-primary-glow text-lg"
               >
