@@ -189,20 +189,22 @@ export default function VerifyAssignment() {
                 </div>
               )}
 
-              <Button
-                onClick={() => handleVerify()}
-                disabled={loading || !qrData.trim()}
-                className="w-full h-12 bg-gradient-to-r from-primary to-primary-glow text-lg"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="ml-2 h-5 w-5 animate-spin" />
-                    جاري التحقق...
-                  </>
-                ) : (
-                  "التحقق من الأمر"
-                )}
-              </Button>
+              {scanMode === "manual" && (
+                <Button
+                  onClick={() => handleVerify()}
+                  disabled={loading || !qrData.trim()}
+                  className="w-full h-12 bg-gradient-to-r from-primary to-primary-glow text-lg"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="ml-2 h-5 w-5 animate-spin" />
+                      جاري التحقق...
+                    </>
+                  ) : (
+                    "التحقق من الأمر"
+                  )}
+                </Button>
+              )}
             </CardContent>
           </Card>
 
